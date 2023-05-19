@@ -1,5 +1,6 @@
 const x = require('./x');
 
+// TODO: Everything!
 // hasMany and belongsTo statements
 
-module.exports = { User, Gallery, Painting };
+module.exports = { y, z };
