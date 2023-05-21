@@ -1,6 +1,13 @@
-const x = require('./x');
+// Pulls the models from their file locations
+const User = require('./User');
+const BlogPost = require('./BlogPost');
 
-// TODO: Everything!
-// hasMany and belongsTo statements
+// Ascribes a relationship between the two
+User.hasMany(BlogPost, {
+    foreignKey: 'user_id',
+});
+BlogPost.belongsTo(User);
 
-module.exports = { y, z };
+// Exports the module
+module.exports = { User, BlogPost };
+
