@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3001;
 
 // Configuration for the sequelize session TODO: Fill me in!
 const sess = {
-  secret: '',
+  secret: 'DBTechBlogSecretStuffHere',
   cookie: {},
   resave: false,
   saveUninitialized: true,
