@@ -1,3 +1,4 @@
+-- COMPLETE:
 -- Basic delete and create of test database to be used
 DROP DATABASE IF EXISTS techblog_db;
 

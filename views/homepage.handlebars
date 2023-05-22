@@ -1,9 +1,23 @@
-<div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+{{#unless loggedIn}}
+<br><br><br>
+<div class="d-flex justify-content-center">
+    <form class="SignUpForm">
+        <h2>CREATE AN ACCOUNT</h2>
+        <div class="form-group">
+            <label for="usernameSignUp">Username</label>
+            <input type="text" class="form-control" id="usernameSignUp" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="emailSignUp">Email address</label>
+            <input type="email" class="form-control" id="emailSignUp" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="passSignUp">Password</label>
+            <input type="password" class="form-control" id="passSignUp" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
 </div>
+
+<script src="../public/js/login.js"></script>
+{{/unless}}
