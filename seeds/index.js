@@ -1,3 +1,4 @@
+// COMPLETE:
 // Calling config for login to seqeulize via .env file
 const sequelize = require('../config/connection');
 const seedUsers = require('./userData');

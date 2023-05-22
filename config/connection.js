@@ -1,3 +1,4 @@
+// COMPLETE:
 // Initializing required packages
 const Sequelize = require('sequelize');
 require('dotenv').config();

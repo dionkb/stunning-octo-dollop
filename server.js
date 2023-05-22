@@ -1,3 +1,4 @@
+// COMPLETE:
 // Calling packages that will be required to run application
 const path = require('path');
 const express = require('express');
@@ -14,10 +15,14 @@ const helpers = require('./utils/helpers');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Configuration for the sequelize session TODO: Fill me in!
+// Configuration for the sequelize session
 const sess = {
   secret: 'DBTechBlogSecretStuffHere',
-  cookie: {},
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 24 hour cookie age max
+    httpOnly: true,
+    sameSite: 'strict',
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({

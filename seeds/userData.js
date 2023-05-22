@@ -1,3 +1,4 @@
+// COMPLETE:
 // Pull requires model into play
 const { User } = require('../models');
 
