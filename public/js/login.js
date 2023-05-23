@@ -1,8 +1,8 @@
 const loginFormHandler = async (event) => {
     event.preventDefault();
 
-    const email = document.querySelector('#email-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
+    const email = document.querySelector('#emailInput').value.trim();
+    const password = document.querySelector('#passInput').value.trim();
 
     if (email && password) {
         const response = await fetch('/api/users/login', {
@@ -12,7 +12,8 @@ const loginFormHandler = async (event) => {
         });
 
         if (response.ok) {
-        document.location.replace('/test');
+        document.location.replace('/');
+        console.log("You are logged in!");
         } else {
         alert('Failed to log in.');
         }
@@ -45,6 +46,6 @@ document
     .querySelector('.loginForm')
     .addEventListener('submit', loginFormHandler);
 
-document
-    .querySelector('.signupForm')
-    .addEventListener('submit', signupFormHandler);
+// document
+//     .querySelector('.signUpForm')
+//     .addEventListener('submit', signupFormHandler);
