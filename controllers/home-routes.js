@@ -3,7 +3,7 @@ const { User, BlogPost } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET all blogposts for homepage
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findAll({
         // include: [
@@ -28,34 +28,34 @@ router.get('/', async (req, res) => {
     }
 });
 
-// // GET one blogpost
-// router.get('/blogpost/:id', withAuth, async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
+// GET one blogpost
+router.get('/blogPosts/:id', withAuth, async (req, res) => {
+  // If the user is not logged in, redirect the user to the login page
 
-//     // If the user is logged in, allow them to view the blogpost
-//     try {
-//     const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
-//         include: [
-//         {
-//             model: Painting,
-//             attributes: [
-//             'id',
-//             'title',
-//             'artist',
-//             'exhibition_date',
-//             'filename',
-//             'description',
-//             ],
-//         },
-//         ],
-//     });
-//     const blogPost = dbBlogPostData.get({ plain: true });
-//     res.render('blogpost', { blogpost, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//     }
-// });
+    // If the user is logged in, allow them to view the blogpost
+    try {
+    const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+        include: [
+        {
+            model: User,
+            attributes: [
+            'id',
+            // 'title',
+            // 'artist',
+            // 'exhibition_date',
+            // 'filename',
+            // 'description',
+            ],
+        },
+        ],
+    });
+    const blogPost = dbBlogPostData.get({ plain: true });
+    res.render('blogPosts', { blogPost, loggedIn: req.session.loggedIn });
+    } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+    }
+});
 
 // // GET one painting
 // router.get('/painting/:id', withAuth, async (req, res) => {
@@ -80,6 +80,15 @@ router.get('/login', (req, res) => {
     }
 
     res.render('login');
+});
+
+router.get('/createAccount', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('createAccount');
 });
 
 module.exports = router;
