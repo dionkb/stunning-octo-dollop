@@ -1,25 +1,7 @@
-{{#unless loggedIn}}
-<br><br><br>
-<div class="d-flex justify-content-center">
-    <form class="signUpForm">
-        <h2>CREATE AN ACCOUNT</h2>
-        <div class="form-group">
-            <label for="usernameSignUp">Username</label>
-            <input type="text" class="form-control" id="usernameSignUp" placeholder="Enter username">
-        </div>
-        <div class="form-group">
-            <label for="emailSignUp">Email address</label>
-            <input type="email" class="form-control" id="emailSignUp" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="passSignUp">Password</label>
-            <input type="password" class="form-control" id="passSignUp" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-dark">Submit</button>
-    </form>
-</div>
-
-<script src="/js/login.js"></script>
+{{#if loggedIn}}
+    {{#each blogPosts as |blogPost|}}
+    {{> posts-homepage}}
+    {{/each}}
 {{else}}
-<h1> TEST! </h1>
-{{/unless}}
+<h1> LOG IN!!!!! </h1>
+{{/if}}
