@@ -91,4 +91,13 @@ router.get('/createAccount', (req, res) => {
     res.render('createAccount');
 });
 
+router.get('/dashboard', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+
+    res.render('dashboard');
+});
+
 module.exports = router;
