@@ -83,4 +83,26 @@ router.post('/logout', (req, res) => {
     }
 });
 
+// CREATE new comment on a post
+router.post('/comment', async (req, res) => {
+    try {
+        const commentData = await Comment.create({
+            author: req.body.username,
+            post_date: req.body.post_date,
+            body_text: req.body.body_text,
+        });
+        console.log(commentData);
+
+        req.session.save(() => {
+        req.session.loggedIn = true;
+
+        res.status(200).json(commentData);
+        });
+        console.log("TESTTEST");
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
