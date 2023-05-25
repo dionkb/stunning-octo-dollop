@@ -37,6 +37,9 @@ BlogPost.init(
         key: 'id',
       },
     },
+    // comments: {
+    //   type: DataTypes.STRING,  -------------> Will this need to exist? Think more on it
+    // }
   },
   {
     sequelize,
