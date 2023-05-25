@@ -30,25 +30,22 @@ router.get('/', withAuth, async (req, res) => {
 
 // GET one blogpost
 router.get('/blogPosts/:id', withAuth, async (req, res) => {
-  // If the user is not logged in, redirect the user to the login page
-
-    // If the user is logged in, allow them to view the blogpost
     try {
-    const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
-        include: [
-        {
-            model: User,
-            attributes: [
-            'id',
-            // 'title',
-            // 'artist',
-            // 'exhibition_date',
-            // 'filename',
-            // 'description',
+        const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+            include: [
+            {
+                model: User,
+                attributes: [
+                'id',
+                // 'title',
+                // 'artist',
+                // 'exhibition_date',
+                // 'filename',
+                // 'description',
+                ],
+            },
             ],
-        },
-        ],
-    });
+        });
     const blogPost = dbBlogPostData.get({ plain: true });
     res.render('blogPosts', { blogPost, loggedIn: req.session.loggedIn });
     } catch (err) {
@@ -78,7 +75,6 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
 
@@ -87,17 +83,11 @@ router.get('/createAccount', (req, res) => {
         res.redirect('/');
         return;
     }
-
-    res.render('createAccount');
+    res.render('createAccount', { loggedIn: req.session.loggedIn });
 });
 
-router.get('/dashboard', (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect('/login');
-        return;
-    }
-
-    res.render('dashboard');
+router.get('/dashboard', withAuth, (req, res) => {
+    res.render('dashboard', { loggedIn: req.session.loggedIn });
 });
 
 module.exports = router;
