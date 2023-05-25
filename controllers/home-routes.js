@@ -33,17 +33,10 @@ router.get('/blogPosts/:id', withAuth, async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
             include: [
-            {
+                {
                 model: User,
-                attributes: [
-                'id',
-                // 'title',
-                // 'artist',
-                // 'exhibition_date',
-                // 'filename',
-                // 'description',
-                ],
-            },
+                attributes: ['id'],
+                },
             ],
         });
     const blogPost = dbBlogPostData.get({ plain: true });
@@ -70,6 +63,7 @@ router.get('/blogPosts/:id', withAuth, async (req, res) => {
 // }
 // });
 
+// Handles login page rendering and redirecting
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -78,6 +72,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+// Handles createAccount page rendering and redirecting
 router.get('/createAccount', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -86,8 +81,10 @@ router.get('/createAccount', (req, res) => {
     res.render('createAccount', { loggedIn: req.session.loggedIn });
 });
 
+// Handles dashboard page rendering and redirecting
 router.get('/dashboard', withAuth, (req, res) => {
     res.render('dashboard', { loggedIn: req.session.loggedIn });
 });
 
+// Exports these routes!
 module.exports = router;
