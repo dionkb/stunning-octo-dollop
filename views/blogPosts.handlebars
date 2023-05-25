@@ -1,4 +1,5 @@
 <br>
+{{!-- The original blog post --}}
 <div class="card w-75 text-light bg-dark mx-auto">
     <div class="card-header">
         {{blogPost.title}}
@@ -8,5 +9,16 @@
             <p>{{blogPost.body_text}}</p>
             <footer class="blockquote-footer">Posted by {{blogPost.author}}, {{format_time blogPost.post_date}}</footer>
         </blockquote>
+    </div>
+</div>
+
+<br>
+{{!-- Reply box --}}
+<div class="card w-75 text-light bg-dark mx-auto">
+    <div class="input-group input-group-lg">
+        <input type="text" class="form-control" placeholder="Type your reply" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary text-light" type="button">Reply</button>
+        </div>
     </div>
 </div>
