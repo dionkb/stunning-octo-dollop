@@ -6,10 +6,11 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findAll({
-        // include: [
+            attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'] // Is author redundant due to user_id??
+        // include: [  ------------> Will I need this to remove author redundancy? TODO: Try later
         //     {
-        //     model: Painting,
-        //     attributes: ['filename', 'description'],
+        //     model: User,
+        //     attributes: ['username'],
         //     },
         // ],
         });
@@ -21,6 +22,8 @@ router.get('/', withAuth, async (req, res) => {
         res.render('homepage', {
         blogPosts,
         loggedIn: req.session.loggedIn,
+        username: req.session.username,
+        user_id: req.session.user_id
         });
     } catch (err) {
         console.log(err);
@@ -63,11 +66,6 @@ router.get('/createAccount', (req, res) => {
         return;
     }
     res.render('createAccount', { loggedIn: req.session.loggedIn });
-});
-
-// Handles dashboard page rendering and redirecting
-router.get('/dashboard', withAuth, (req, res) => {
-    res.render('dashboard', { loggedIn: req.session.loggedIn });
 });
 
 // Exports these routes!
