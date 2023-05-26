@@ -1,7 +1,3 @@
-{{#if loggedIn}}
-    {{#each blogPosts as |blogPost|}}
-    {{> posts-homepage}}
-    {{/each}}
-{{else}}
-<h1> LOG IN!!!!! </h1>
-{{/if}}
+{{#each blogPosts as |blogPost|}}
+{{> posts-homepage}}
+{{/each}}
