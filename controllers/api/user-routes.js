@@ -16,19 +16,16 @@ router.get('/', async (req, res) => {
 });
 
 // CREATE new user
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const dbUserData = await User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-        });
-        req.session.save(() => {
-        req.session.loggedIn = true;
-        req.session.username = dbUserData.username;
-        req.session.user_id = dbUserData.id;
+        const dbUserData = await User.create(req.body);
 
-        res.status(200).json(dbUserData);
+        req.session.save(() => {
+            req.session.loggedIn = true;
+            req.session.username = dbUserData.username;
+            req.session.user_id = dbUserData.id;
+
+            res.status(200).json(dbUserData);
         });
     } catch (err) {
         console.log(err);

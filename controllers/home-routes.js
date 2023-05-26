@@ -3,7 +3,7 @@ const { User, BlogPost, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET all blogposts for homepage
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findAll({
             attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'] // Is author redundant due to user_id??
