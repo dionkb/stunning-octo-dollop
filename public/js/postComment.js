@@ -1,6 +1,5 @@
 const postComment = async () => {
-    // const response = await fetch('/api/users/comment', {
-    const response = await fetch('/api/users', {
+    const response = await fetch('/api/comments', {
         method: 'POST',
         body: JSON.stringify({ commentInput }),
         headers: { 'Content-Type': 'application/json' },

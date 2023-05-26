@@ -1,7 +1,9 @@
+// TEST: 
 const router = require('express').Router();
 const { User, BlogPost } = require('../../models');
+const withAuth = require('../../utils/auth.js');
 
-// GET all users for testing
+// GET all users for testing purposes
 router.get('/', async (req, res) => {
     try {
         const userData = await User.findAll({
@@ -14,17 +16,17 @@ router.get('/', async (req, res) => {
 });
 
 // CREATE new user
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
         const dbUserData = await User.create({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
         });
-        console.log(dbUserData);
-
         req.session.save(() => {
         req.session.loggedIn = true;
+        req.session.username = dbUserData.username;
+        req.session.user_id = dbUserData.id;
 
         res.status(200).json(dbUserData);
         });
@@ -34,7 +36,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Login
+// Login to user account
 router.post('/login', async (req, res) => {
     try {
         const dbUserData = await User.findOne({
@@ -61,6 +63,8 @@ router.post('/login', async (req, res) => {
 
         req.session.save(() => {
         req.session.loggedIn = true;
+        req.session.username = dbUserData.username;
+        req.session.user_id = dbUserData.id;
 
         res
             .status(200)
@@ -73,35 +77,13 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
         res.status(204).end();
         });
     } else {
         res.status(404).end();
-    }
-});
-
-// CREATE new comment on a post
-router.post('/comment', async (req, res) => {
-    try {
-        const commentData = await Comment.create({
-            author: req.body.username,
-            post_date: req.body.post_date,
-            body_text: req.body.body_text,
-        });
-        console.log(commentData);
-
-        req.session.save(() => {
-        req.session.loggedIn = true;
-
-        res.status(200).json(commentData);
-        });
-        console.log("TESTTEST");
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
     }
 });
 
