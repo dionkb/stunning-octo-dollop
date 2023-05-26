@@ -29,13 +29,10 @@ router.get('/', async (req, res) => {
 router.post('/', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.create({   
-            // post_date: req.body.post_date,
-            author: req.session.username,
-            post_date: new Date(),
-            body_text: req.body.body_text,
-            user_id: req.session.user_id
+            body_text: req.body.comment,
+            user_id: req.session.user_id,
+            blogpost_id: req.body.blogpost_id
         });
-        console.log(commentData); //TEST:
         res.status(200).json(commentData);
     } catch (err) {
         console.log(err);
