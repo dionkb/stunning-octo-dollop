@@ -3,7 +3,7 @@ const { User, BlogPost, Comment } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
 // TEST: GET route to view all comments
-router.get('/', withAuth, async (req, res) => { // I might not want withAuth here bc all users need to see comments?
+router.get('/', async (req, res) => {
     try{ 
         const savedComments = await Comment.findAll({});
         if (!savedComments) {
