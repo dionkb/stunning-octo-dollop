@@ -8,14 +8,10 @@ router.get('/', async (req, res) => {
         const dbBlogPostData = await BlogPost.findAll({
             attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'], // Is author redundant due to user_id??
             include: [ 
-                // { FIXME: THIS MODEL DOESNT WORK??
-                //     model: Comment,
-                //     attribute: ['id', 'author', 'post_date', 'body_text', 'user_id', 'blogPost_id']
-                // }
-        //     { //------------> Will I need this to remove author redundancy? TODO: Try later
-        //     model: User,
-        //     attributes: ['username'],
-        //     },
+                {
+                    model: User,
+                    attribute: ['username']
+                }
             ],
         });
 
@@ -32,30 +28,6 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
-    }
-});
-
-// GET one blogpost
-router.get('/blogPosts/:id', withAuth, async (req, res) => {
-    try {
-        const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
-            attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'],
-            // include: [
-            //     {
-            //         model: Comment,
-            //         attribute: ['id', 'author', 'post_date', 'body_text', 'user_id', 'blogPost_id']
-            //     },
-            //     {
-            //     model: User,
-            //     attributes: ['id', 'username'],
-            //     },
-            // ],
-        });
-    const blogPost = dbBlogPostData.get({ plain: true });
-    res.render('blogPosts', { blogPost, loggedIn: req.session.loggedIn });
-    } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
     }
 });
 

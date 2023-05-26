@@ -17,16 +17,34 @@ router.get('/', async (req, res) => {
     }
 });
 
-// TEST: POST route to CREATE a new blog post
-router.post('/', withAuth, async (req, res) => {
+// GET one blogpost
+router.get('/:id', async (req, res) => {
     try {
-        const newBlogPost = await BlogPost.create({ ...req.body, userId: req.session.userId });
-        console.log(newBlogPost); // TESTING
-        res.status(200).json(newBlogPost);
+        const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+            include: [ 
+                { model: User, attributes: ['username']}, 
+                { model: Comment, attributes: ['id', 'body_text', 'user_id', 'createdAt', 'updatedAt'] } 
+            ],
+        });
+    const blogPost = dbBlogPostData.get({ plain: true });
+
+    res.render('blogPosts', { blogPost, loggedIn: req.session.loggedIn });
     } catch (err) {
-        res.status(400).json(err);
+    console.log(err);
+    res.status(500).json(err);
     }
 });
+
+// TEST: POST route to CREATE a new blog post
+// router.post('/', withAuth, async (req, res) => {
+//     try {
+//         const newBlogPost = await BlogPost.create({ ...req.body, userId: req.session.userId });
+//         console.log(newBlogPost); // TESTING
+//         res.status(200).json(newBlogPost);
+//     } catch (err) {
+//         res.status(400).json(err);
+//     }
+// });
 
 // TODO: PUT route to UPDATE a blog post
 
