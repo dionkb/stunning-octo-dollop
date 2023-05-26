@@ -1,13 +1,16 @@
 // TEST: 
 const router = require('express').Router();
-const { User, BlogPost } = require('../../models');
+const { User, BlogPost, Comment } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
 // GET all users for testing purposes
 router.get('/', async (req, res) => {
     try {
         const userData = await User.findAll({
-            include: [{ model: BlogPost }],
+            include: [ 
+                { model: BlogPost, attributes: ['id', 'title', 'body_text', 'user_id', 'createdAt', 'updatedAt'] }, 
+                { model: Comment, attributes:  ['id', 'body_text', 'user_id', 'blogpost_id', 'createdAt', 'updatedAt']} 
+            ],
         });
         res.status(200).json(userData);
         } catch (err) {

@@ -5,7 +5,13 @@ const withAuth = require('../../utils/auth.js');
 // TEST: GET route to view all comments
 router.get('/', async (req, res) => {
     try{ 
-        const savedComments = await Comment.findAll({});
+        const savedComments = await Comment.findAll({
+            include: [ 
+                { model: User, attributes: ['username'] }, 
+                { model: BlogPost, attributes: ['title'] } 
+            ],
+            attributes: ['id', 'body_text', 'user_id', 'blogpost_id', 'createdAt', 'updatedAt'],
+        });
         if (!savedComments) {
             res.status(404).json({ message: "No comments to display"});
             return;

@@ -1,3 +1,4 @@
+// COMPLETE: ?
 // Pulls the models from their file locations
 const User = require('./User');
 const BlogPost = require('./BlogPost');
@@ -9,18 +10,18 @@ User.hasMany(BlogPost, {
 });
 BlogPost.belongsTo(User);
 
-// FIXME: Ascribes a relationship between the user and their comments
+// Ascribes a relationship between the user and their comments
 User.hasMany(Comment, {
     foreignKey: 'user_id',
 });
 Comment.belongsTo(User);
 
-// FIXME: Ascribes a relationship between the blog posts and their comment replies
+// Ascribes a relationship between the blog posts and their comment replies
 BlogPost.hasMany(Comment, {
-    foreignKey: 'user_id',
+    foreignKey: 'blogpost_id',
 });
 Comment.belongsTo(BlogPost);
 
 // Exports the module
-module.exports = { User, BlogPost };
+module.exports = { User, BlogPost, Comment };
 
