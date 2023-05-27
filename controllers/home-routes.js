@@ -1,12 +1,12 @@
+// COMPLETE:
 const router = require('express').Router();
-const { User, BlogPost, Comment } = require('../models');
-const withAuth = require('../utils/auth');
+const { User, BlogPost } = require('../models');
 
 // GET all blogposts for homepage
 router.get('/', async (req, res) => {
     try {
         const dbBlogPostData = await BlogPost.findAll({
-            attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'], // Is author redundant due to user_id??
+            attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'],
             include: [ 
                 {
                     model: User,
@@ -20,10 +20,10 @@ router.get('/', async (req, res) => {
         );
 
         res.render('homepage', {
-        blogPosts,
-        loggedIn: req.session.loggedIn,
-        username: req.session.username,
-        user_id: req.session.user_id
+            blogPosts,
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+            user_id: req.session.user_id
         });
     } catch (err) {
         console.log(err);

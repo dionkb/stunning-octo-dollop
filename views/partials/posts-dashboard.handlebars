@@ -1,0 +1,14 @@
+<br>
+<div class="card w-75 bg-dark mx-auto">
+    <a class="text-light nav-link" href="/api/blogPosts/{{id}}">
+    <div class="card-header">
+        {{title}}
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>{{body_text}}</p>
+            <footer class="blockquote-footer">Posted by {{user.username}}, {{format_time createdAt}}</footer>
+        </blockquote>
+    </div>
+    </a>
+</div>
