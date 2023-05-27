@@ -35,16 +35,21 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// TEST: POST route to CREATE a new blog post
-// router.post('/', withAuth, async (req, res) => {
-//     try {
-//         const newBlogPost = await BlogPost.create({ ...req.body, userId: req.session.userId });
-//         console.log(newBlogPost); // TESTING
-//         res.status(200).json(newBlogPost);
-//     } catch (err) {
-//         res.status(400).json(err);
-//     }
-// });
+// POST route to CREATE a new blog post
+router.post('/', withAuth, async (req, res) => {
+    let user_id = req.session.user_id;
+    try {
+        const newBlogPost = await BlogPost.create({
+            title: req.body.title,
+            body_text: req.body.body_text,
+            userId: user_id 
+        });
+        console.log(newBlogPost); // TESTING
+        res.status(200).json(newBlogPost);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 // TODO: PUT route to UPDATE a blog post
 

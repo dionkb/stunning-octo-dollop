@@ -1,3 +1,9 @@
+{{#if loggedIn}}
+<br> 
+<a class="btn btn-dark mx-auto" href="/dashboard/newPost" role="button" style="display: block; width: 200px">Create New Post</a>
+{{/if}}
+
 {{#each userPosts as |userPost|}}
 {{> posts-dashboard}}
 {{/each}}
+
