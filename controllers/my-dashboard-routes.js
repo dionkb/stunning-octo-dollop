@@ -4,10 +4,10 @@ const withAuth = require('../utils/auth');
 
 // Handles dashboard page rendering of ALL users own posts
 router.get('/', withAuth, (req, res) => {
+    let user_id = req.session.user_id;
     BlogPost.findAll({
-        where: { user_id: 4 },  // Swap this out for line below once validation is added
-        // where: { user_id: req.sessions.user_id }, FIXME: Add validation so if user has no posts, then display that!
-        attribute: ['id', 'title', 'author', 'post_date', 'body_text', 'user_id'], 
+        where: { user_id:  user_id },
+        attribute: ['id', 'title', 'post_date', 'body_text', 'user_id'], 
         include: [
             {
                 model: Comment,
@@ -26,15 +26,23 @@ router.get('/', withAuth, (req, res) => {
     })
     .then((userPostData) => {
         const userPosts = userPostData.map((userPost) => userPost.get({ plain: true }));
-        console.log(userPosts);
-        console.log(userPosts[0].title);
+        const noPosts = {
+            id: null,
+            title: "You do not have any posts",
+            createdAt: new Date(),
+            body_text: "Make your first post by clicking the 'Create New Post' button",
+            user_id: user_id,
+        };
+        if (userPosts.length === 0) {
+            userPosts.push(noPosts);
+        };
 
         res.render('dashboard', { 
-            userPosts, 
+            userPosts,
             loggedIn: req.session.loggedIn, 
             username: req.session.username,
         })  
-    }) 
+    })
     .catch((err) => {
         console.log(err);
         res.status(500).json(err);
