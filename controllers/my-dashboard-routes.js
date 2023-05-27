@@ -54,10 +54,18 @@ router.get('/', withAuth, (req, res) => {
     //
 // });
 
-// TODO: CREATE a new user blog post
-// router.post('/', withAuth, (req, res) => {
-    //
-// });
+// Handles newPost page rendering and redirecting
+router.get('/newPost', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+    res.render('newPost', {
+        loggedIn: req.session.loggedIn,
+        username: req.session.username,
+        user_id: req.session.user_id
+    });
+});
 
 // Exports these routes!
 module.exports = router;
