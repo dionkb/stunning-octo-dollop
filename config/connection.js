@@ -23,7 +23,7 @@
 // module.exports = {
 //   HOST: "us-cdbr-east-06.cleardb.net",
 //   USER: "b4e45312be1e82",
-//   PASSWORD: "heroku_8b70ae66cd5dbf3",
+//   PASSWORD: "660dc92b",
 //   DB: "heroku_8b70ae66cd5dbf3"
 // };
 
@@ -36,11 +36,11 @@ require('dotenv').config();
 
 // Setting up info to be pulled from .env file for secure server login
 const sequelize = new Sequelize(
-  "heroku_8b70ae66cd5dbf3",
-  "b4e45312be1e82",
-  "heroku_8b70ae66cd5dbf3",
+  "heroku_8b70ae66cd5dbf3", // DB Name
+  "b4e45312be1e82", // Username
+  "660dc92b", // Password
   {
-    host: 'localhost',
+    host: 'us-cdbr-east-06.cleardb.net', // Host
     dialect: 'mysql',
     port: 3306,
   }
