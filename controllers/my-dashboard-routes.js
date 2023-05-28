@@ -49,11 +49,6 @@ router.get('/', withAuth, (req, res) => {
     });
 });
 
-// TODO: Handles dashboard page rendering of INDIVIDUAL user post
-// router.get('/', withAuth, (req, res) => {
-    //
-// });
-
 // Handles newPost page rendering and redirecting
 router.get('/newPost', (req, res) => {
     if (!req.session.loggedIn) {
@@ -65,6 +60,60 @@ router.get('/newPost', (req, res) => {
         username: req.session.username,
         user_id: req.session.user_id
     });
+});
+
+// Handles dashboard page rendering of INDIVIDUAL user post
+router.get('/editPost/:id', async (req, res) => {
+    try {
+        const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+            include: [ 
+                { model: User, attributes: ['username']}, 
+                { model: Comment, attributes: ['id', 'body_text', 'user_id', 'createdAt', 'updatedAt'] } 
+            ],
+        });
+    const blogPost = dbBlogPostData.get({ plain: true });
+
+    res.render('editPost', { blogPost, loggedIn: req.session.loggedIn });
+    } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+    }
+});
+
+// PUT route to UPDATE a blog post
+router.put('/editPost/:id', (req, res) => {
+    const id = req.body.id;
+    BlogPost.update(
+        {
+            title: req.body.title,
+            body_text: req.body.body_text
+        },
+        { where: { id: id } }
+    )
+        .then((updatedPost) => {
+        console.log(updatedPost);
+        res.json(updatedPost);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// DELETE route to DELETE a blog post
+router.delete('/editPost/:id', (req, res) => {
+    const id = req.body.id;
+    BlogPost.destroy(
+        { where: { id: id } }
+    )
+        .then((updatedPost) => {
+        console.log(updatedPost);
+        res.json(updatedPost);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 // Exports these routes!
