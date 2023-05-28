@@ -1,5 +1,5 @@
-<br>
 {{!-- The original blog post --}}
+<br>
 <div class="card w-75 text-light bg-dark mx-auto">
     <div class="card-header">
         {{blogPost.title}}
@@ -13,8 +13,8 @@
     </div>
 </div>
 
-<br>
 {{!-- Reply box --}}
+<br>
 <div class="card w-75 text-light bg-dark mx-auto">
     <div class="input-group input-group-lg">
         <input type="text" class="form-control" id="commentBox" for="commentInput" placeholder="Type your reply" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -24,9 +24,9 @@
     </div>
 </div>
 
+{{!-- Comments on this post --}}
 <br>
 <h1 style="text-align: center">Comments</h1>
-
 {{#each blogPost.comments}}
 <br>
 <div class="card w-75 text-light bg-dark mx-auto">
