@@ -1,11 +1,8 @@
-// TODO: 
 const postComment = async (event) => {
     event.preventDefault();
 
     const comment = document.querySelector('#commentBox').value
-    // console.log(comment);
     const blogpost_id = document.querySelector('#blogPostID').value
-    // console.log(blogpost_id);
 
     const response = await fetch('/api/comments', {
         method: 'POST',
@@ -15,7 +12,6 @@ const postComment = async (event) => {
 
     if (response.ok) {
         // document.location.reload();
-        console.log(comment + " " + blogpost_id);
     } else {
         alert(response.statusText);
     }
