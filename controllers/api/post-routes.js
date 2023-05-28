@@ -44,16 +44,10 @@ router.post('/', withAuth, async (req, res) => {
             body_text: req.body.body_text,
             userId: user_id 
         });
-        console.log(newBlogPost); // TESTING
         res.status(200).json(newBlogPost);
     } catch (err) {
         res.status(400).json(err);
     }
 });
-
-// TODO: PUT route to UPDATE a blog post
-
-
-// TODO: DELETE route to DELETE a blog post
 
 module.exports = router;
