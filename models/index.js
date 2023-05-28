@@ -1,4 +1,3 @@
-// COMPLETE: ?
 // Pulls the models from their file locations
 const User = require('./User');
 const BlogPost = require('./BlogPost');

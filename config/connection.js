@@ -1,8 +1,8 @@
-// Initializing required packages
+// // Initializing required packages
 // const Sequelize = require('sequelize');
 // require('dotenv').config();
 
-// Setting up info to be pulled from .env file for secure server login
+// // Setting up info to be pulled from .env file for secure server login
 // const sequelize = new Sequelize(
 //   process.env.DB_NAME,
 //   process.env.DB_USER,
@@ -14,7 +14,7 @@
 //   }
 // );
 
-// Exporting file
+// // Exporting file
 // module.exports = sequelize;
 
 // --------------------------------------------------------------------------------- //

@@ -1,4 +1,3 @@
-// COMPLETE:
 // Pull requires model into play
 const { BlogPost } = require('../models');
 

@@ -1,4 +1,3 @@
-// COMPLETE:
 // Calling packages that will be required to run application
 const path = require('path');
 const express = require('express');
