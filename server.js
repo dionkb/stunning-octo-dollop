@@ -21,6 +21,7 @@ const sess = {
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hour cookie age max
     httpOnly: true,
+    secure: true,
     sameSite: 'strict',
   },
   resave: false,
