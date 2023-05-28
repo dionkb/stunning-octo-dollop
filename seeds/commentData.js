@@ -1,4 +1,3 @@
-// COMPLETE:
 // Pull required model into play
 const { Comment } = require('../models');
 

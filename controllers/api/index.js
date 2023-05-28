@@ -1,4 +1,3 @@
-// COMPLETE: ?
 // Allows use of express router to develop pathway
 const router = require('express').Router();
 
