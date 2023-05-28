@@ -13,6 +13,7 @@
     </div>
 </div>
 
+{{#if loggedIn}}
 {{!-- Reply box --}}
 <br>
 <div class="card w-75 text-light bg-dark mx-auto">
@@ -23,6 +24,14 @@
         </div>
     </div>
 </div>
+{{else}}
+<br>
+<div class="card w-75 text-light bg-dark mx-auto">
+    <div class="input-group input-group-lg">
+        <input type="text" class="form-control" id="commentBox" for="commentInput" placeholder="Log in to reply" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+    </div>
+</div>
+{{/if}}
 
 {{!-- Comments on this post --}}
 <br>
