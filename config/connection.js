@@ -40,7 +40,7 @@ const sequelize = new Sequelize(
   "b4e45312be1e82",
   "heroku_8b70ae66cd5dbf3",
   {
-    host: 'us-cdbr-east-06.cleardb.net',
+    host: 'localhost',
     dialect: 'mysql',
     port: 3306,
   }
