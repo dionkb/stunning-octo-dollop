@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
-// TEST: GET route to view all comments
 router.get('/', async (req, res) => {
     try{ 
         const savedComments = await Comment.findAll({
@@ -22,9 +21,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// TODO: GET route to view comments from one post? Will I need this?
-
-
 // CREATE new comment on a blog post
 router.post('/', withAuth, async (req, res) => {
     try {
@@ -40,21 +36,22 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-// TEST: DELETE route to delete a comment
-router.delete('/:id', withAuth, async (req, res) => {
-    try {
-        const savedComment = await Comment.destroy({
-            where: {id: req.params.id},
-        });        
-        if (!savedComment) {
-            res.status(404).json({ message: 'No comment is found' });
-        return;
-        }  
-        res.status(200).json({savedComment, success: true});
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+// FUTURE DEVELOPMENT!
+// DELETE route to delete a comment
+// router.delete('/:id', withAuth, async (req, res) => {
+//     try {
+//         const savedComment = await Comment.destroy({
+//             where: {id: req.params.id},
+//         });        
+//         if (!savedComment) {
+//             res.status(404).json({ message: 'No comment is found' });
+//         return;
+//         }  
+//         res.status(200).json({savedComment, success: true});
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 
 module.exports = router;

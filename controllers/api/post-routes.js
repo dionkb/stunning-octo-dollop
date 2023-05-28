@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
             include: [ 
                 { 
                     model: User, attributes: ['username']
-                }, 
+                },
                 { 
                     model: Comment, 
                     attributes: ['id', 'body_text', 'user_id', 'createdAt', 'updatedAt'], 
@@ -33,8 +33,10 @@ router.get('/:id', async (req, res) => {
                     ]
                 }
             ],
+            order: [[ Comment, 'createdAt', 'DESC' ]],
         });
     const blogPost = dbBlogPostData.get({ plain: true });
+    console.log(blogPost);
     res.render('blogPosts', { blogPost, loggedIn: req.session.loggedIn });
     } catch (err) {
     console.log(err);
