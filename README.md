@@ -8,7 +8,7 @@
   User can view posts and comments from other users. If they want to add their own input, then can sign up or sign in, and then begin posting as well. Information is securely stored, and the interface is intuitive and easy to follow.
 
   Screenshot of final output:  
-  ![screenshot or gif](./.\assets\Screenshot.jpg)
+  ![screenshot or gif](assets/Screenshot.jpg)
 
   ## Table of Contents
   * [Dependencies](#dependencies)
