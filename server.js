@@ -20,7 +20,7 @@ const sess = {
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hour cookie age max
     httpOnly: true,
-    secure: true,
+    // secure: true, Can't use since deployed on heroku without https security?
     sameSite: 'strict',
   },
   resave: false,
