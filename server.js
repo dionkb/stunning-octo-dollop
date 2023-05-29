@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3001;
 
 // Configuration for the sequelize session
 const sess = {
-  secret: 'DBTechBlogSecretStuffHere',
+  secret: process.env.secret,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hour cookie age max
     httpOnly: true,
